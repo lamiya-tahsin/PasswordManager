@@ -28,14 +28,14 @@ public class PasswordController {
     }
 
     @GetMapping("/user/passwords")
-    public String profile(Principal principal, Model model) {
+    public String passwords(Principal principal, Model model) {
         // Get the current user's email
         String email = principal.getName();
-
+//        System.out.println("PasswordController e " +email);
         // Retrieve the user information
         User user = userRepo.findByEmail(email);
         model.addAttribute("user", user);
-
+//        System.out.println("PasswordController e ami k" +user);
         // Retrieve passwords for the current user
         model.addAttribute("passwords", passwordService.getPasswordsForCurrentUser());
 
@@ -51,7 +51,7 @@ public class PasswordController {
     }
 
     @PostMapping("/user/savePasswordEntry")
-    public String savePasswordEntry(@RequestParam("password") Password password, HttpSession session, Principal p) {
+    public String savePasswordEntry(@ModelAttribute("password") Password password, HttpSession session, Principal p) {
         password.setUserEmail(p.getName()); // Set the userEmail
 
         Password savedPassword = passwordService.savePasswordEntry(password);

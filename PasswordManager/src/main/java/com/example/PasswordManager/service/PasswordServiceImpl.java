@@ -46,8 +46,8 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public Password savePasswordEntry(Password password){
-        String managedPassword=passwordEncoder.encode(password.getPassword());
-        password.setPassword(managedPassword);
+        String managedPassword=passwordEncoder.encode(password.getSitePassword());
+        password.setSitePassword(managedPassword);
         return passwordRepo.save(password);
     }
 }

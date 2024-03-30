@@ -12,7 +12,7 @@ public class Password {
     private String URL;
 
     private String userName;
-    private String password;
+    private String sitePassword;
     private String userEmail;
 
     @ManyToOne
@@ -53,12 +53,12 @@ public class Password {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSitePassword() {
+        return sitePassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSitePassword(String password) {
+        this.sitePassword = password;
     }
 
     public String getUserEmail() {

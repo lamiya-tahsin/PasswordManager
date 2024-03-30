@@ -71,6 +71,7 @@ public class HomeController {
         }
 
         User u = userService.saveUser(user);
+//        System.out.println(u);
 
         if (u != null) {
             session.setAttribute("msg", "Registration saved successfully");
