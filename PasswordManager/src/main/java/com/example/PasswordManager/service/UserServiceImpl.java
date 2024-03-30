@@ -52,6 +52,35 @@ public class UserServiceImpl implements UserService {
         return userRepo.existsByMobileNo(mobile);
     }
 
+    public boolean isValidPassword(String password) {
+        // Password must be 8-20 characters long
+        if (password.length() < 8 || password.length() > 20) {
+            return false;
+        }
+
+        // Must contain at least one letter and one number
+        boolean hasLetter = false;
+        boolean hasNumber = false;
+        for (char ch : password.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                hasLetter = true;
+            } else if (Character.isDigit(ch)) {
+                hasNumber = true;
+            }
+        }
+        if (!hasLetter || !hasNumber) {
+            return false;
+        }
+
+        // Must not contain spaces, special characters, or emojis
+        if (!password.matches("[a-zA-Z0-9]+")) {
+            return false;
+        }
+
+        return true;
+    }
+
+
 
 
 }

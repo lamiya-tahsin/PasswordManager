@@ -58,7 +58,11 @@ public class HomeController {
             return "redirect:/register"; // Redirect back to the registration page
         }
 
-
+        boolean validPassword=userService.isValidPassword(user.getPassword());
+        if (!validPassword) {
+            session.setAttribute("msg", "Password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.");
+            return "redirect:/register"; // Redirect back to the registration page
+        }
 
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             // Password and confirm password do not match
@@ -70,7 +74,7 @@ public class HomeController {
 
         if (u != null) {
             session.setAttribute("msg", "Registration saved successfully");
-            return "redirect:/user/profile";
+            return "redirect:/user/passwords";
         } else {
             session.setAttribute("msg", "Something went wrong! User info not saved.");
             return "redirect:/register";

@@ -7,4 +7,5 @@ import java.util.List;
 public interface PasswordService {
     List<Password> getPasswordsForCurrentUser();
     public Password savePasswordEntry(Password password);
+    public void removeSessionMessage();
 }

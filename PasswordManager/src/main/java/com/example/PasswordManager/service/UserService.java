@@ -12,4 +12,6 @@ public interface UserService {
 
     public boolean checkMobile(String mobile);
 
+    public boolean isValidPassword(String password);
+
 }
