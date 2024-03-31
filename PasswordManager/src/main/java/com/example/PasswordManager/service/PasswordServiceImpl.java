@@ -50,10 +50,7 @@ public class PasswordServiceImpl implements PasswordService {
 //        String managedPassword=passwordEncoder.encode(password.getSitePassword());
 //        password.setSitePassword(managedPassword);
 //        return passwordRepo.save(password);
-        System.out.println(password.getSitePassword());
         String encryptedPassword = EncryptionUtils.encrypt(password.getSitePassword());
-        System.out.println(encryptedPassword);
-        System.out.println(EncryptionUtils.decrypt(encryptedPassword));
         password.setSitePassword(encryptedPassword);
         return passwordRepo.save(password);
     }
@@ -76,7 +73,7 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public Password updatePassword(Password password) {
-        String updatedPassword=passwordEncoder.encode(password.getSitePassword());
+        String updatedPassword=EncryptionUtils.encrypt(password.getSitePassword());
         password.setSitePassword(updatedPassword);
         return passwordRepo.save(password);
     }
