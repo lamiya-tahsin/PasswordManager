@@ -27,6 +27,8 @@ Password Manager is a web application designed to securely store and manage user
 
 - **Database**:
     - MySQL
+- **IDE Used**:
+    - IntelliJ
 
 ## Getting Started
 
