@@ -2,6 +2,8 @@ package com.example.PasswordManager.service;
 
 import com.example.PasswordManager.entity.User;
 
+import java.time.LocalDateTime;
+
 public interface UserService {
 
     public User saveUser(User user);
@@ -14,4 +16,7 @@ public interface UserService {
 
     public boolean isValidPassword(String password);
 
+    public String sendEmail(User user);
+
+    boolean hasExipred(LocalDateTime expiryDateTime);
 }

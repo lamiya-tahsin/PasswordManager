@@ -1,9 +1,8 @@
 package com.example.PasswordManager.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -70,6 +69,13 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PasswordResetToken> passwordResetToken;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
     @Override
