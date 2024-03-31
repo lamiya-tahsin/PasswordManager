@@ -55,15 +55,6 @@ public class PasswordServiceImpl implements PasswordService {
         return passwordRepo.save(password);
     }
 
-//    @Override
-//    public Password getPasswordById(Integer id) {
-////        return passwordRepo.findById(id).get();
-//        Password password = passwordRepo.findById(id).get();
-//        if (password != null) {
-//            password.setSitePassword(EncryptionUtils.decrypt(password.getSitePassword()));
-//        }
-//        return password;
-//    }
 
     @Override
     public Password getPasswordById(Integer id) {
@@ -73,8 +64,11 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public Password updatePassword(Password password) {
+        System.out.println(password.getSitePassword());
         String updatedPassword=EncryptionUtils.encrypt(password.getSitePassword());
+        System.out.println(updatedPassword);
         password.setSitePassword(updatedPassword);
+        System.out.println(EncryptionUtils.decrypt(updatedPassword));
         return passwordRepo.save(password);
     }
 

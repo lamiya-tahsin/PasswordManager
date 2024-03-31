@@ -110,7 +110,7 @@ public class PasswordController {
         existingPassword.setSiteName(password.getSiteName());
         existingPassword.setURL(password.getURL());
         existingPassword.setUserName(password.getUserName());
-//        existingPassword.setSitePassword(password.getSitePassword());
+        existingPassword.setSitePassword(password.getSitePassword());
 //        existingPassword.getSitePassword();
 //
         //save updated password object
