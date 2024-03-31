@@ -72,8 +72,12 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        // Must not contain spaces, special characters, or emojis
-        if (!password.matches("[a-zA-Z0-9]+")) {
+        // Must not contain spaces
+        if (!password.matches("[a-zA-Z0-9@/_]+")) {
+            return false;
+        }
+
+        if (!password.matches(".*[@*_/].*")) {
             return false;
         }
 

@@ -2,6 +2,7 @@ package com.example.PasswordManager.service;
 
 import com.example.PasswordManager.entity.Password;
 import com.example.PasswordManager.repository.PasswordRepo;
+import com.example.PasswordManager.util.EncryptionUtils;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,8 +47,42 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public Password savePasswordEntry(Password password){
-        String managedPassword=passwordEncoder.encode(password.getSitePassword());
-        password.setSitePassword(managedPassword);
+//        String managedPassword=passwordEncoder.encode(password.getSitePassword());
+//        password.setSitePassword(managedPassword);
+//        return passwordRepo.save(password);
+        System.out.println(password.getSitePassword());
+        String encryptedPassword = EncryptionUtils.encrypt(password.getSitePassword());
+        System.out.println(encryptedPassword);
+        System.out.println(EncryptionUtils.decrypt(encryptedPassword));
+        password.setSitePassword(encryptedPassword);
         return passwordRepo.save(password);
+    }
+
+//    @Override
+//    public Password getPasswordById(Integer id) {
+////        return passwordRepo.findById(id).get();
+//        Password password = passwordRepo.findById(id).get();
+//        if (password != null) {
+//            password.setSitePassword(EncryptionUtils.decrypt(password.getSitePassword()));
+//        }
+//        return password;
+//    }
+
+    @Override
+    public Password getPasswordById(Integer id) {
+        return passwordRepo.findById(id).get();
+    }
+
+
+    @Override
+    public Password updatePassword(Password password) {
+        String updatedPassword=passwordEncoder.encode(password.getSitePassword());
+        password.setSitePassword(updatedPassword);
+        return passwordRepo.save(password);
+    }
+
+    @Override
+    public void deletePasswordById(Integer id) {
+        passwordRepo.deleteById(id);
     }
 }

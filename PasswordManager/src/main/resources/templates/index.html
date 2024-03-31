@@ -7,8 +7,72 @@
 </head>
 <body>
 <section>
-  <h1>Index page</h1>
-</section>
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h1>Generate Random Passwords</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <form th:action="@{/generatePassword}" method="get">
+              <button type="submit" class="btn btn-primary">Generate Password</button>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form th:action="@{/clearPassword}" method="get">
+              <button type="submit" class="btn btn-secondary">Clear Password</button>
+            </form>
+          </div>
+        </div>
 
+        <input type="text" class="form-control" placeholder="Your generated password will appear here" th:readonly="true" th:value="${generatedPassword}">
+      </div>
+    </div>
+  </div>
+<!--  th:onclick="'javascript:clearPassword()'"-->
+  <script th:inline="javascript">
+    function clearPassword() {
+      document.querySelector('input[type="text"]').value = ''; // Clear the input field
+    }
+  </script>
+
+  <h2>Password Tips</h2>
+
+  <h3>Use a combination of character types:</h3>
+  <ul>
+    <li>Uppercase letters: A-Z</li>
+    <li>Lowercase letters: a-z</li>
+    <li>Numbers: 0-9</li>
+    <li>Symbols: ~`!@#$%^&*()_-+={[}]|:;"'<,>.?/</li>
+  </ul>
+
+  <h3>Avoid common patterns and easily guessable passwords:</h3>
+  <ul>
+    <li>Do not use dictionary words or permutations of such.</li>
+    <li>Avoid using common words, names, technical jargon, and keyboard sequences.</li>
+    <li>Do not base your password on personal information like your name, birthday, or social security number.</li>
+  </ul>
+
+  <h3>Create strong, memorable passwords:</h3>
+  <ul>
+    <li>Use random, pronounceable syllables to form words that are easy to remember.</li>
+    <li>Create acronyms for unique phrases and substitute characters for complexity.</li>
+    <li>Combine two separate words and apply character substitution for added complexity.</li>
+  </ul>
+
+  <h3>Utilize character substitution:</h3>
+  <ul>
+    <li>Replace certain letters with symbols, numbers, or uppercase letters to enhance complexity.</li>
+    <li>Combine words or phrases creatively:</li>
+    <li>Insert numbers between letters or use patterns for increased complexity.</li>
+  </ul>
+
+  <h3>Phrase-based passwords:</h3>
+  <ul>
+    <li>Use statements, locations, or lines from books/movies and apply character substitution.</li>
+  </ul>
+  </div>
+<!--th:field="${generatedPassword}"-->
+
+</section>
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.example.PasswordManager.controller;
 
 import com.example.PasswordManager.entity.User;
 import com.example.PasswordManager.service.UserService;
+import com.example.PasswordManager.util.PasswordGenerator;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,10 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping("/")
-    public String index()
-    {
+    public String index(){
         return "index";
     }
+
 
     @GetMapping("/register")
     public String register()
@@ -34,12 +36,6 @@ public class HomeController {
     public String signin()
     {
         return "signin";
-    }
-
-    @GetMapping("/user/home")
-    public String home()
-    {
-        return "home";
     }
 
     @PostMapping("/saveUser")
@@ -60,7 +56,7 @@ public class HomeController {
 
         boolean validPassword=userService.isValidPassword(user.getPassword());
         if (!validPassword) {
-            session.setAttribute("msg", "Password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.");
+            session.setAttribute("msg", "Password must be 8-20 characters long, contain letters and numbers, at least one special character from /,@,#_ and must not contain any spaces, or emoji.");
             return "redirect:/register"; // Redirect back to the registration page
         }
 
@@ -82,6 +78,33 @@ public class HomeController {
         }
 
     }
+
+    @GetMapping("/generatePassword")
+    public String generatePassword(Model model, HttpSession session) {
+        if(session.getAttribute("generatedPassword") == null) {
+            String generatedPassword = PasswordGenerator.generatePassword(14);
+            model.addAttribute("generatedPassword", generatedPassword);
+            session.setAttribute("generatedPassword", generatedPassword);
+        }
+        System.out.println(session.getAttribute("generatedPassword"));
+        return "index";
+    }
+
+    @GetMapping("/clearPassword")
+    public String clearPassword(Model model, HttpSession session)
+    {
+        if (session.getAttribute("generatedPassword") != null)
+        {
+            session.removeAttribute("generatedPassword");
+        }
+        System.out.println(session.getAttribute("generatedPassword"));
+        return "index";
+
+
+    }
+
+
+
 
 
 }
